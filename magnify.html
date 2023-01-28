@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="zh">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <style>
+      * {
+        box-sizing: border-box;
+      }
+      html,
+      body {
+        background-color: #5b8fb9;
+        width: 100vw;
+        min-height: 100vh;
+        overflow: hidden;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+      .magnify {
+        width: 80vw;
+        height: 50vw;
+        display: flex;
+        gap: 10px;
+      }
+      .img {
+        position: relative;
+        background-color: #cde990;
+        flex: 1;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+      .img img {
+        width: 80%;
+      }
+      .pos {
+        position: absolute;
+        top: 0;
+        left: 0;
+        transform: translate(-50%, -50%);
+        width: 6vw;
+        height: 6vw;
+        border-radius: 50%;
+        background-image: radial-gradient(transparent 2px, #cde990 2px);
+        background-size: 4px 4px;
+        backdrop-filter: saturate(90%) blur(4px);
+        opacity: 0;
+      }
+      .magnify-img {
+        background-color: #4e6c50;
+        flex: 1;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        contain: paint;
+      }
+      .magnify-img-box {
+        position: absolute;
+        left: 0;
+        top: 0;
+        padding: 25vw 50%;
+      }
+      .magnify-img-box img {
+        opacity: 0;
+      }
+      .overlay {
+        position: absolute;
+      }
+    </style>
+    <title>magnify</title>
+  </head>
+  <body>
+    <section class="magnify">
+      <section class="img">
+        <img src="./image/诺艾尔.jpg" />
+        <div class="pos"></div>
+      </section>
+      <section class="magnify-img">
+        <div class="magnify-img-box">
+          <img src="" />
+        </div>
+      </section>
+    </section>
+    <section class="overlay"></section>
+  </body>
+
+  <script>
+    const magnification = 4
+    const imgBox = document.getElementsByClassName('img')[0];
+    const pic = imgBox.children[0];
+    const picSrc = pic.src;
+    const magnifyImgBox = document.getElementsByClassName('magnify-img-box')[0];
+    const magnifyImg = magnifyImgBox.children[0];
+    const overlay = document.getElementsByClassName('overlay')[0];
+    const pos = document.getElementsByClassName('pos')[0];
+    function magnify() {
+      const imgBoxSize = imgBox.getBoundingClientRect();
+      const picSize = pic.getBoundingClientRect();
+      magnifyImg.src = picSrc;
+      magnifyImg.width = picSize.width * magnification;
+      const picX = picSize.x;
+      const picY = picSize.y;
+      pic.addEventListener('mouseover', () => {
+        magnifyImg.style.opacity = '1';
+        overlay.style = `
+            left: ${picSize.x}px;
+            top: ${picSize.y}px;
+            width: ${picSize.width}px;
+            height: ${picSize.height}px;
+        `;
+      });
+      overlay.addEventListener('mouseout', () => {
+        magnifyImg.style.opacity = '0';
+        pos.style.opacity = '0';
+        overlay.style = 'left: auto; top: auto; width: auto; height: auto;';
+      });
+      overlay.addEventListener('mousemove', (e) => {
+        magnifyImgBox.style = `
+            left: ${-(e.clientX - picX) * magnification}px;
+            top: ${-(e.clientY - picY) * magnification}px;
+        `;
+        pos.style = `
+            opacity: 1;
+            left: ${e.clientX - imgBoxSize.x}px;
+            top: ${e.clientY - imgBoxSize.y}px;
+        `;
+      });
+    }
+    window.onload = () => {magnify()};
+    window.onresize = () => {magnify()};
+  </script>
+</html>
