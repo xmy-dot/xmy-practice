@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <style>
+            * {
+                box-sizing: border-box;
+            }
+            html,
+            body {
+                width: 100%;
+                min-height: 100vh;
+                background-color: #bad1c2;
+                margin: 0;
+                padding: 0;
+            }
+            body {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                --dark: #497174;
+                /* --dark: rgb(73, 113, 116); */
+                --light: #eff5f5;
+                /* --light: rgb(239, 245, 245); */
+                --bgc: #967e76;
+            }
+            .flexCenter {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+            }
+            section {
+                width: 80vmin;
+                height: 80vmin;
+                border-radius: 10vmin;
+                overflow: hidden;
+                box-shadow: 10px 10px 10px 5px #49717418,
+                    10px -10px 10px 5px #49717434, -10px 10px 10px 5px #49717434,
+                    -10px -10px 10px 5px #49717434;
+            }
+            .round {
+                width: 65vmin;
+                height: 65vmin;
+                background-color: var(--bgc);
+                border-radius: 50%;
+                filter: drop-shadow(5px 5px 20px var(--dark));
+            }
+            ul {
+                padding: 0;
+                margin: 0;
+            }
+            li {
+                list-style: none;
+                text-align: center;
+                font-size: 5vmin;
+                width: 50vmin;
+                height: 31.5vmin;
+                transform-origin: 50% 100%;
+                position: absolute;
+                left: 0;
+                right: 0;
+                margin: auto;
+            }
+            li:nth-child(1) {
+                transform: rotate(22.5deg);
+            }
+            li:nth-child(2) {
+                transform: rotate(67.5deg);
+            }
+            li:nth-child(3) {
+                transform: rotate(112.5deg);
+            }
+            li:nth-child(4) {
+                transform: rotate(157.5deg);
+            }
+            li:nth-child(5) {
+                transform: rotate(202.5deg);
+            }
+            li:nth-child(6) {
+                transform: rotate(247.5deg);
+            }
+            li:nth-child(7) {
+                transform: rotate(292.5deg);
+            }
+            li:nth-child(8) {
+                transform: rotate(337.5deg);
+            }
+            li img {
+                margin-top: 3vmin;
+                width: 10vmin;
+                border-radius: 50%;
+            }
+            li p {
+                margin: 0;
+            }
+            li:nth-child(odd) p {
+                color: var(--dark);
+            }
+            li:nth-child(even) p {
+                color: var(--light);
+            }
+            li:nth-child(odd) img {
+                filter: drop-shadow(5px 5px 20px rgba(73, 113, 116, 0.7));
+            }
+            li:nth-child(even) img {
+                filter: drop-shadow(5px 5px 20px rgba(239, 245, 245, 0.3));
+            }
+            /* .pointerShadow,
+            .pointer {
+                width: 10vmin;
+                height: 10vmin;
+                background-color: var(--dark);
+                border-radius: 50%;
+                position: absolute;
+                display: flex;
+                justify-content: center;
+                z-index: 1;
+            }
+            .pointerShadow::after,
+            .pointer::after {
+                content: '';
+                display: block;
+                position: absolute;
+                width: 5vmin;
+                height: 4vmin;
+                clip-path: polygon(50% 0%, 10% 100%, 90% 100%);
+                transform: translateY(-90%);
+            }
+            .pointerShadow{
+                left: 50%;
+                top: 50%;
+                transform: translate(-50%, -50%);
+            }
+            .pointer {
+                background-color: var(--bgc);
+                z-index: 5;
+            }
+            .pointerShadow::after {
+                background-color: var(--dark);
+            }
+            .pointer::after {
+                background-color: var(--bgc);
+                z-index: 5;
+            } */
+            .pointer
+            /* ,.pointer::after */ {
+                position: absolute;
+                width: 10vmin;
+                height: 10vmin;
+                border-radius: 50%;
+            }
+            .triangle {
+                content: '';
+                display: block;
+                position: absolute;
+                width: 5vmin;
+                height: 4vmin;
+                clip-path: polygon(50% 0%, 10% 100%, 90% 100%);
+                background-color: var(--bgc);
+                transform: translateY(-90%);
+            }
+            .pointer {
+                display: flex;
+                justify-content: center;
+                background-color: var(--bgc);
+                z-index: 5;
+            }
+            /* .pointer::after {
+                content: '';
+                display: block;
+                background-color: var(--light);
+                filter: blur(45px);
+                top: 10px;
+                left: 10px;
+                z-index: -1;
+            } */
+            .contain {
+                width: 63vmin;
+                height: 63vmin;
+                border-radius: 50%;
+                background-color: #ffebb7;
+                background: conic-gradient(
+                    var(--light) 12.5%,
+                    var(--dark) 12.5%,
+                    var(--dark) 25%,
+                    var(--light) 25%,
+                    var(--light) 37.5%,
+                    var(--dark) 37.5%,
+                    var(--dark) 50%,
+                    var(--light) 50%,
+                    var(--light) 62.5%,
+                    var(--dark) 62.5%,
+                    var(--dark) 75%,
+                    var(--light) 75%,
+                    var(--light) 87.5%,
+                    var(--dark) 87.5%
+                );
+                /* transform: rotate(calc(var(--rotate))); */
+                transform: rotate(var(--rotate));
+            }
+        </style>
+        <title>Document</title>
+    </head>
+    <body>
+        <section class="flexCenter">
+            <div class="round flexCenter">
+                <!-- <div class="pointerShadow">
+                    <div class="pointer"></div>
+                </div> -->
+                <div class="pointer">
+                    <div class="triangle"></div>
+                </div>
+                <ul class="contain">
+                    <li>
+                        <img src="./image/可莉.jpg" alt="" />
+                        <p>0</p>
+                    </li>
+                    <li>
+                        <img src="./image/凌华.jpg" alt="" />
+                        <p>1</p>
+                    </li>
+                    <li>
+                        <img src="./image/宵宫.jpg" alt="" />
+                        <p>2</p>
+                    </li>
+                    <li>
+                        <img src="./image/刻晴.jpg" alt="" />
+                        <p>3</p>
+                    </li>
+                    <li>
+                        <img src="./image/胡桃.jpg" alt="" />
+                        <p>4</p>
+                    </li>
+                    <li>
+                        <img src="./image/皇女.jpg" alt="" />
+                        <p>5</p>
+                    </li>
+                    <li>
+                        <img src="./image/甘雨.jpg" alt="" />
+                        <p>6</p>
+                    </li>
+                    <li>
+                        <img src="./image/莫娜.jpg" alt="" />
+                        <p>7</p>
+                    </li>
+                </ul>
+            </div>
+        </section>
+        <script>
+            const section = document.getElementsByTagName('section')[0];
+            const pointer = document.getElementsByClassName('pointer')[0];
+            const contain = document.getElementsByClassName('contain')[0];
+            const baseRunDegree = 360 * 10; //抽奖动画至少转动十圈
+            let prizeID = 0; //中奖项目id
+            const prizeItemDegree = [
+                -22.5, 292.5, 247.5, 202.5, 157.5, 112.5, 67.5, 22.5,
+            ];
+            const rotateItemDegree = 360 / 8; //每个项目转动角度
+            section.style.cssText = `--rotate: ${prizeItemDegree[prizeID]}deg`; //根据中奖项目计算结束时转动角度
+
+            function getRandomNum() {
+                // 获取中奖项目id
+                return Math.floor(Math.random() * 8);
+            }
+
+            function totalRotateDegree(prizeID) {
+                // 根据中奖项目id计算转动总角度
+                return baseRunDegree + prizeItemDegree[prizeID];
+            }
+
+            pointer.addEventListener('click', run);
+            function run() {
+                prizeID = getRandomNum();
+                const total = totalRotateDegree(prizeID);
+                console.log('totalRotateDegree', total, 'id', prizeID);
+                section.style.cssText = `--rotate: ${prizeItemDegree[prizeID]}deg`;
+                runAnima(total);
+            }
+            // 动画开始
+            function runAnima(total) {
+                //设置动画
+                section.style.cssText = `--rotate: ${total}deg`;
+                contain.style = 'transition: all 4s ease;';
+                // transform: rotate(${total}deg);
+                section.addEventListener('transitionend', stopRunAnima);
+            }
+            // 停止动画
+            function stopRunAnima() {
+                section.style.cssText = `--rotate: ${prizeItemDegree[prizeID]}deg`;
+                contain.style = '';
+            }
+        </script>
+    </body>
+</html>
